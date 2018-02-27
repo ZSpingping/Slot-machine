@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>game</title>
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<script src="js/jquery-1.8.3.min.js"></script>
+<body>
+	<div class="container">
+
+		<div class="fen">
+			<p>三联竖：<span class="sanlianshu">0</span>个<span class="jifen">0</span>分</p>
+			<p>三联横：<span class="sanlianheng">0</span>个<span class="jifen">0</span>分</p>
+			<p>四联横：<span class="silianheng">0</span>个<span class="jifen">0</span>分</p>
+			<p>五联横：<span class="wulianheng">0</span>个<span class="jifen">0</span>分</p>
+		</div>
+		<div class="voice">
+			<audio id="myaudio-bg" src="audio/1.mp3" preload="auto"  autoplay="autoplay"  loop="loop" >
+				您的浏览器不支持 audio 标签。
+			</audio>
+			<audio id="myaudio-play" src="audio/2.mp3"   loop="loop" >
+				您的浏览器不支持 audio 标签。
+			</audio>
+<!--
+			<audio id="myaudio-jifen" src="audio/3.mp3"  loop="loop" >
+				您的浏览器不支持 audio 标签。
+			</audio>
+-->
+		</div>
+		<div class="content">
+			<ul>
+				<li>
+					<div class="lun-box">
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+					</div>					
+				</li>
+				<li>
+					<div class="lun-box">
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+					</div>					
+				</li>
+				<li>
+					<div class="lun-box">
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+					</div>					
+				</li>
+				<li>
+					<div class="lun-box">
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+					</div>					
+				</li>
+				<li>
+					<div class="lun-box">
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+						<div class="img-wrap"></div>
+					</div>					
+				</li>
+			</ul>
+			<div class="con-btn">start</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script src="./js/main.js"></script>

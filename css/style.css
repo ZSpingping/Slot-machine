@@ -1,0 +1,147 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+	text-decoration:none;
+}
+body{
+	background-image:url('../images/bg1.jpg');
+}
+/*container部分*/
+.container{
+	width:100%;
+	height:auto;
+/*	border:1px solid red;*/
+}
+.content{
+	width:90%;
+	margin:0 auto;
+	margin-top:100px;
+/*	border:1px solid red;*/
+}
+/*边框线设置*/
+.content>ul{
+	width:100%;
+/*	border:3px solid transparent;*/
+	overflow: hidden;
+	position:relative;
+	height:auto;
+	-webkit-border-image:url(../images/border.jpg) 30 30 round;
+	-moz-border-image:url(../images/border.jpg) 30 30 round;
+    -o-border-image:url('../images/border.jpg') 30 30 round;
+    border-image:url('../images/border.jpg') 30 30 round;
+}
+.content>ul>li{
+	width:19.3%;
+	float:left;
+	border:1px solid yellow;
+	overflow:hidden;
+}
+.img-wrap{
+	width:100%;
+/*	border:1px solid blue;*/
+    bottom:0px;
+	overflow:hidden;
+}
+.img-wrap>img{
+    width:100%;
+	height:100%;
+	display:block;
+}
+/*.con-btn按钮*/
+.con-btn{
+	width:75px;
+	height:75px;
+	border:1px solid red;
+	border-radius:50%;
+	background:red;
+	text-align: center;
+	line-height:65px;
+	font-size:24px;
+	font-weight:700;
+	color:#fff;
+}
+@media screen and (min-width:360px) and (max-width:959px){
+	.con-btn{
+		position:absolute;
+		left:140px;
+		bottom:6%;
+	}
+	.content{
+		width:90%;
+		margin:0 auto;
+		margin-top:50px;
+		/*	border:1px solid red;*/
+	}
+
+	/*边框线设置*/
+	.content>ul{
+		width:100%;
+		border:3px solid transparent;
+		overflow: hidden;
+		position:relative;
+		height:auto;
+		-webkit-border-image:url(../images/border.jpg) 30 30 round;
+		-moz-border-image:url(../images/border.jpg) 30 30 round;
+		-o-border-image:url('../images/border.jpg') 30 30 round;
+		border-image:url('../images/border.jpg') 30 30 round;
+	}
+}
+
+.fen>p{
+	font-size:20px;
+	color:#fff;
+}
+
+/*用于结果出来相同图片的联系*/
+/*竖线*/
+.shu{
+	width:4px;
+	background:yellow;
+	position:absolute;
+}
+/*横线*/
+.heng{
+	height:4px;
+	background:yellow;
+	position:absolute;
+}
+/*斜下*/
+.xiexia{
+	height:4px;
+	background:yellow;
+	position:absolute;
+	transform:rotate(45deg);
+	-webkit-transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	-o-transform:rotate(45deg);
+	-webkit-transform-origin:0% 50%;
+	-moz-transform-origin:0% 50%;
+	-o-transform-origin:0% 50%;
+	transform-origin:0% 50%;
+}
+/*斜上*/
+.xieshang{
+	height:4px;
+	background:yellow;
+	position:absolute;
+	transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-o-transform:rotate(-45deg);
+	-webkit-transform-origin:0% 50%;
+	-moz-transform-origin:0% 50%;
+	-o-transform-origin:0% 50%;
+	transform-origin:0% 50%;
+}
+@media screen and (min-width:960px){
+	.con-btn{
+	  margin:0 auto;
+	margin-top:10px;
+	}
+	.content{
+		width:60%;
+		margin:0 auto;
+		/*	border:1px solid red;*/
+	}
+}

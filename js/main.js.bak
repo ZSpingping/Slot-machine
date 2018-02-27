@@ -1,0 +1,282 @@
+$(function(){
+        var arr = [
+            "./images/n1.png",
+            "./images/n2.png",
+            "./images/n3.png",
+            "./images/n5.png",
+            "./images/n6.png",
+            "./images/n7.png"
+        ];
+    $('.img-wrap').each(function(){
+        var img = new Image();
+        img.src=arr[rand(0,arr.length-1)];
+        $(this).append(img);
+    })
+    
+    
+    function rand(m,n){
+        return(Math.floor(Math.random()*(n-m+1))+m);
+    }
+    
+    
+    var myaudio = document.getElementById('myaudio-bg');
+    var myaudio2 = document.getElementById('myaudio-play');
+    var myaudio3 = document.getElementById('myaudio-jifen');
+    //游戏是否开启标志
+    var game = true;
+    //屏幕滚动的方法
+    
+    $('.con-btn').click(function(){   
+        myaudio.pause();//停止背景音乐
+        myaudio2.play();
+        if(game==true){
+            //动画函数
+
+            $('.heng').remove();
+            $('.shu').remove();
+            $('.xieshang').remove();
+            $('.xiexia').remove();
+            if($('.lun-box').eq(0).children().length==3){
+                $('.lun-box').each(function(){
+                    var imgwrap = '<div class="img-wrap"><img src='+arr[rand(0,arr.length-1)]+'></div>';
+                    $(this).prepend(imgwrap);
+                });
+            }
+            gamefun();
+        }else{
+            alert('游戏正在运行，请稍后！！！')
+        }
+    })
+    
+    
+
+
+
+//获取li的高度。默认为0；
+var bb = 0;
+//保存的值
+var cc = 0;
+//每一个div.img-wrap的高度
+var imgh = 0;
+//获取Imgdiv 的高度
+        imgh = $('.img-wrap').height();
+        clearInterval(run);
+        $('.content>ul>li').height(imgh*3);
+        //默认从底部开始
+        $('.content>ul>li').scrollTop(imgh);
+        bb = imgh;
+        if($('.content>ul>li').height()==0){
+            window.location();
+        }
+
+    
+    //游戏图片滚动函数动画
+    function gamefun(){
+        clearInterval(Run)
+        
+        //默认个数
+        var dlen = 0;
+        
+        //用于计次
+        var count = 0;
+        var yan = true;
+        var Run = setInterval(function(){
+            bb-=3;
+            for(var l=dlen,llen= $('.content>ul>li').length;l<llen;l++){
+                $('.content>ul>li').eq(l).scrollTop(bb);
+            }
+            if(bb<=0){
+                for(var l=dlen,llen= $('.lun-box').length;l<llen;l++){
+                    $('.lun-box').eq(l).children().eq(3).remove()
+                }
+                for(var l=dlen,llen= $('.lun-box').length;l<llen;l++){
+                    var imgwrap = '<div class="img-wrap"><img src='+arr[rand(0,arr.length-1)]+'></div>';
+                    $('.lun-box').eq(l).prepend(imgwrap);
+                }
+                for(var l=dlen,llen= $('.content>ul>li').length;l<llen;l++){
+                    $('.content>ul>li').eq(l).scrollTop(imgh);
+                }
+                count++;
+                if(count==20){
+                    dlen++;
+                }
+                if(count==25){
+                    dlen++;
+                }
+                if(count==30){
+                    dlen++;
+                }
+                if(count==35){
+                    dlen++;
+                }
+                if(count==40){
+                    dlen++;
+                }
+                if(count==45){
+                    clearInterval(Run);
+                    judge();
+                    game=true;
+                }
+                bb=imgh;
+            }
+
+        },1)
+
+
+        //游戏是否开启标志;当代码执行到此处时。代表游戏已经执行过。
+        game = false;
+    }
+    
+    
+    
+    
+    
+    //判断函数
+    function judge(){
+
+        var sanlianshu = 0;
+        var sanlianheng = 0;
+        var silianheng = 0;
+        var wulianheng = 0;
+        $('.lun-box').each(function(){
+            $(this).children().eq(0).remove();
+        })
+        for(var i=0,ileng=$('.lun-box').length;i<ileng;i++){
+            for(var j=0,jleng=$('.lun-box').eq(i).children().length;j<jleng;j++){
+                var onea = $('.lun-box').eq(i).children().eq(j).children().attr('src');
+                var oneb = $('.lun-box').eq(i).children().eq(j+1).children().attr('src');
+
+                var shuleft = $('.lun-box').eq(i).children().eq(j).position().left+$('.img-wrap').width()/2;
+                var hengwidth = $('.img-wrap').width();
+                if(onea==oneb){
+                    var onec = $('.lun-box').eq(i).children().eq(j+2).children().attr('src');
+                    if(onec==onea){
+
+                        var shutop = $('.img-wrap').height()/2;
+                        myaudio2.pause();
+                        var shudiv = '<div class="shu"></div>';
+                        $('.lun-box').eq(i).append(shudiv);
+                        $('.lun-box').eq(i).children('.shu').css({left:shuleft+'px',top:shutop+'px'}).animate({'height':shutop*4+'px'},1000);
+                        sanlianshu++;
+                    };
+                }
+                var twoa = $('.lun-box').eq(i+1).children().eq(j).children().attr('src');
+                if(onea==twoa){
+                    var twob = $('.lun-box').eq(i+2).children().eq(j).children().attr('src');
+                    if(onea==twob){
+                        var hengtop = $('.lun-box').eq(i).children().eq(j).position().top+$('.img-wrap').width()/2;
+                        var twoc = $('.lun-box').eq(i+3).children().eq(j).children().attr('src');
+                        if(onea==twoc){
+                            var twod = $('.lun-box').eq(i+4).children().eq(j).children().attr('src');
+                            if(onea==twod){
+
+                                myaudio2.pause();
+                                var hengdiv = '<div class="heng"></div>';
+                                $('.lun-box').eq(i).append(hengdiv);
+                                $('.lun-box').eq(i).children('.heng').css({left:shuleft+'px',top:hengtop+'px'}).animate({'width':hengwidth*4+'px'},1000);
+                                wulianheng++;
+                                continue;
+                            }else{
+                                console.log(hengtop);
+                                myaudio2.pause();
+                                var hengdiv = '<div class="heng"></div>';
+                                $('.lun-box').eq(i).append(hengdiv);
+                                $('.lun-box').eq(i).children('.heng').css({left:shuleft+'px',top:hengtop+'px'}).animate({'width':hengwidth*3+'px'},1000);
+                                silianheng++;
+                                continue;
+                            }
+                        }else{
+                            myaudio2.pause();
+                            var hengdiv = '<div class="heng"></div>';
+                            $('.lun-box').eq(i).append(hengdiv);
+                            $('.lun-box').eq(i).children('.heng').css({left:shuleft+'px',top:hengtop+'px'}).animate({'width':hengwidth*2+'px'},1000);
+                            sanlianheng++;
+                            continue;
+                        }
+
+                    }
+                }
+                var twobefore = $('.lun-box').eq(i+1).children().eq(j-1).children().attr('src');            
+                var twoafter = $('.lun-box').eq(i+1).children().eq(j+1).children().attr('src');     
+                var rampup = Math.sqrt(Math.pow(imgh,2)*2)-4;
+                
+                //判断当1中2上相等的时候或一下二上的时候
+                if(onea==twobefore){
+                    
+                    var threemiddle = $('.lun-box').eq(i+2).children().eq(j).children().attr('src');  
+                    var threeafter = $('.lun-box').eq(i+2).children().eq(j-2).children().attr('src');  
+                    //判断当一种3中与1中相等的时候
+                    if(onea==threemiddle&&j!=0){
+                        var xietop = $('.lun-box').eq(i).children().eq(j).position().top+imgh/2;
+                        var xietoptwo = $('.lun-box').eq(i+1).children().eq(j-1).position().top+imgh/2;
+                        var xielefttwo = $('.lun-box').eq(i+1).children().eq(j-1).position().left+imgh/2;
+                        var xieleft = $('.lun-box').eq(i).children().eq(j).position().left+imgh/2;
+                        myaudio2.pause();
+                        var xiediv = '<div class="xieshang"></div>';
+                        var xiexiadiv = '<div class="xiexia"></div>';
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).append(xiexiadiv);
+                        $('.lun-box').eq(i).children('.xieshang').css({left:xieleft+'px',top:xietop+'px'}).animate({'width':rampup+'px'},1000);
+                        $('.lun-box').eq(i).children('.xiexia').css({left:xielefttwo+'px',top:xietoptwo+'px'}).animate({'width':rampup+'px'},1000);
+                    }
+                    if(onea==threeafter&&j==2){   //判断当1下与3上相等时
+                        var xietop = $('.lun-box').eq(i).children().eq(j).position().top+imgh/2;
+                        var xietoptwo = $('.lun-box').eq(i+1).children().eq(j-1).position().top+imgh/2;
+                        var xieleft = $('.lun-box').eq(i).children().eq(j).position().left+imgh/2;
+                        var xietwoleft = $('.lun-box').eq(i+1).children().eq(j-1).position().left+imgh/2;
+                        myaudio2.pause();
+                        var xiediv = '<div class="xieshang"></div>';
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).children('.xieshang').eq(0).css({left:xieleft+'px',top:xietop+'px'}).animate({'width':rampup+'px'},1000);
+                        $('.lun-box').eq(i).children('.xieshang').eq(1).css({left:xietwoleft+'px',top:xietoptwo+'px'}).animate({'width':rampup+'px'},1000);
+                    }
+                }else if(onea==twoafter&&j!=2){
+                    var threeone = $('.lun-box').eq(i+2).children().eq(j).children().attr('src');    
+                    var threec = $('.lun-box').eq(i+2).children().eq(j+2).children().attr('src');    
+                    if(onea==threeone){
+                        var xietop = $('.lun-box').eq(i).children().eq(j).position().top+imgh/2;
+                        var xietoptwo = $('.lun-box').eq(i+1).children().eq(j+1).position().top+imgh/2;
+                        var xielefttwo = $('.lun-box').eq(i+1).children().eq(j+1).position().left+imgh/2;
+                        var xieleft = $('.lun-box').eq(i).children().eq(j).position().left+imgh/2;
+                        myaudio2.pause();
+                        var xiediv = '<div class="xieshang"></div>';
+                        var xiexiadiv = '<div class="xiexia"></div>';
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).append(xiexiadiv);
+                        $('.lun-box').eq(i).children('.xiexia').css({left:xieleft+'px',top:xietop+'px'}).animate({'width':rampup+'px'},1000);
+                        $('.lun-box').eq(i).children('.xieshang').css({left:xielefttwo+'px',top:xietoptwo+'px'}).animate({'width':rampup+'px'},1000);
+                    }
+                    if(onea==threec&&j==0){
+                        var xietop = $('.lun-box').eq(i).children().eq(j).position().top+imgh/2;
+                        var xietoptwo = $('.lun-box').eq(i+1).children().eq(j+1).position().top+imgh/2;
+                        var xieleft = $('.lun-box').eq(i).children().eq(j).position().left+imgh/2;
+                        var xietwoleft = $('.lun-box').eq(i+1).children().eq(j+1).position().left+imgh/2;
+                        myaudio2.pause();
+                        var xiediv = '<div class="xiexia"></div>';
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).append(xiediv);
+                        $('.lun-box').eq(i).children('.xiexia').eq(0).css({left:xieleft+'px',top:xietop+'px'}).animate({'width':rampup+'px'},1000);
+                        $('.lun-box').eq(i).children('.xiexia').eq(1).css({left:xietwoleft+'px',top:xietoptwo+'px'}).animate({'width':rampup+'px'},1000);
+                    }
+
+                }
+            }
+        }
+        
+        $('.sanlianshu').next('.jifen').html(sanlianshu*20)//三联竖20分
+        $('.sanlianheng').next('.jifen').html(sanlianheng*30)
+        $('.silianheng').next('.jifen').html(silianheng*40)
+        $('.wulianheng').next('.jifen').html(wulianheng*50)
+        $('.sanlianshu').html(sanlianshu)//三联竖20分
+        $('.sanlianheng').html(sanlianheng)
+        $('.silianheng').html(silianheng)
+        $('.wulianheng').html(wulianheng)
+    }
+    
+  
+    
+})
+
+
+
